@@ -1,0 +1,61 @@
+<div class="top">
+  <p>Perfil</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen>
+
+  <div class="header">
+    <div class="photo"></div>
+    <p class="name">{{ user?.first_name }} {{ user?.last_name }}</p>
+    <p class="user">@{{ user?.username }} - Profissão</p>
+    <p class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+    <p class="email">{{ user?.email }}</p>
+    <!--
+      <div class="status">
+        <div class="col">
+          <p>250</p>
+          <p>Projetos</p>
+        </div>
+        <div class="col">
+          <p>250</p>
+          <p>Tarefas</p>
+        </div>
+        <div class="col">
+          <p>250</p>
+          <p>Contatos</p>
+        </div>
+      </div>
+    -->
+  </div>
+
+  <div class="contacts">
+    <div class="contacts-top">
+      <p>Contatos</p>
+      <p class="more" (click)="goToPage('/contact')">Ver todos</p>
+    </div>
+    <div class="list" scrollX="true">
+      
+      <div class="item" *ngFor='let contact of user?.contacts'>
+        <div></div>
+        <p>{{ contact.first_name }}</p>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="posts">
+
+    <button (click)="goToPage('/profile/update')">Editar perfil</button>
+    <!-- <button href="#">Planos</button> -->
+    <!-- <button href="#">Configurações</button> -->
+    <!-- <button href="#">Suporte</button> -->
+    <button (click)="logout()">Sair</button>
+
+  </div>
+
+</ion-content>

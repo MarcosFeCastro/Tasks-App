@@ -1,0 +1,64 @@
+$DRAK-GRAY-D: #434A54;
+$DRAK-GRAY-L: #656d78;
+$MEDIUM-GRAY-D: #AAB2BD;
+$MEDIUM-GRAY-L: #CCD1D9;
+$LIGHT-GRAY-D: #F5F7FA;
+$LIGHT-GRAY-L: #E6E9ED;
+$GRAPEFRUIT-D: #DA4453;
+$GRAPEFRUIT-L: #ED5565;
+$SUNFLOWER-D: #F6BB42;
+$SUNFLOWER-L: #FFCE54;
+$GRASS-D: #8CC152;
+$GRASS-L: #A0D468;
+$BLUE-JEANS-D: #4A89DC;
+$BLUE-JEANS-L: #5D9CEC;
+
+.top-with-btn { z-index: 100; background-color: $DRAK-GRAY-D; color: $LIGHT-GRAY-L;
+    ion-buttons { float: left; margin: 14px; font-size: 1.2em; }
+    p { font-size: 1.4em; letter-spacing: 2px; position: absolute; margin-top: 18px; left: 50%; transform: translate(-50%, 0); }
+    ion-menu-button { float: right; font-size: 4em; margin: 6px 8px; }
+}
+.top { z-index: 100; background-color: $DRAK-GRAY-D; color: $LIGHT-GRAY-L;
+    p { font-size: 1.4em; letter-spacing: 2px; position: absolute; margin-top: 18px; margin-left: 18px; }
+    ion-menu-button { float: right; font-size: 4em; margin: 6px 8px; }
+}
+
+.header { padding: 20px; //margin-bottom: 50px;
+    .photo { width: 100px; height: 100px; border-radius: 50px; margin: 10px auto 30px; background-color: $LIGHT-GRAY-D; }
+    p { margin: 0px; text-align: center; }
+    .name { margin-bottom: 10px; font-size: 1.6em; }
+    .user { margin-bottom: 20px; font-size: .9em; }
+    .description { margin-bottom: 10px; font-size: 1em; padding: 0px 10px; }
+    .email { font-size: 1em; }
+}
+
+.options { text-align: center; margin-bottom: 10px;
+    button { padding: 10px; margin-bottom: 20px; background-color: $BLUE-JEANS-D; color: #FFFFFF; border-radius: 4px; font-size: .96em;
+        &:first-child { margin-right: 20px; }
+        &:last-child { margin-right: 0px; }
+        &:hover { border: none; }
+        &:focus { box-shadow: 0 0 0 0; border: none; outline: 0; }
+    }
+    .delete-btn { background-color: $GRAPEFRUIT-D; }
+}
+
+.contacts { padding: 20px 0px; border-top: 2px solid #EFEFEF;
+    .contacts-top { padding: 0px 20px;
+        p { margin: 0px; font-size: 1.2em;
+            &:first-child { text-align: left; }
+        }
+        .more { text-align: right; font-size: .9em; color: $BLUE-JEANS-D; }
+    }
+    
+    .list { padding: 0px 20px; 
+        .item { margin-right: 30px;
+            &:last-child { padding-right: 20px; }
+            div { width: 50px; height: 50px; border-radius: 30px; background-color: $LIGHT-GRAY-D; margin: 0 auto; }
+            p { margin: 10px 0px 0px 0px; text-align: center; font-size: .9em; }
+        }
+    }
+    .list[scrollx=true] { display: flex; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px;
+        &::-webkit-scrollbar { display: none; }
+        .scroll-item { flex: 0 0 auto; }
+    }
+}

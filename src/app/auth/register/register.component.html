@@ -1,0 +1,65 @@
+
+<ion-content fullscreen>
+
+  <form novalidate [formGroup]="registerForm">
+
+    <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          <h1>Registrar</h1>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <input type="text" name="" id="name" placeholder="Nome" autocomplete="off" formControlName="firstName" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorLogin('firstName') ) }">
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <input type="text" name="" id="username" placeholder="Username" autocomplete="off" formControlName="username" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorLogin('username') ) }">
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <input type="text" name="" id="email" placeholder="Email" autocomplete="off" formControlName="email" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorLogin('email') ) }">
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <input type="password" name="" id="password" placeholder="Senha" autocomplete="off" formControlName="password" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorLogin('password') ) }">
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <input type="password" name="" id="confpassword" placeholder="Confirmar senha" autocomplete="off" formControlName="confpassword" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorLogin('confpassword') ) }">
+        </ion-col>
+      </ion-row>
+      
+      <ion-row class="footer">
+        <ion-col>
+          <!-- Entrar -->
+        </ion-col>
+        <ion-col>
+          <button (click)="register()">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="links">
+        <ion-col>
+          <a (click)="goToPage('/auth/login')">Já tenho uma conta</a>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </form>
+
+</ion-content>

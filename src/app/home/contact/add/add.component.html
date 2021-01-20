@@ -1,0 +1,38 @@
+<div class="top">
+  <ion-buttons slot="start" (click)="goToPage( '/contact' )">
+    <ion-icon name="arrow-back" size="large" slot="start" class="close-project"></ion-icon>
+  </ion-buttons>
+  <p>Novo contato</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen>
+  <form class="search" novalidate [formGroup]="searchForm">
+    <input type="text" placeholder="Buscar" formControlName="username">
+    <button (click)="searchUser()">
+      <ion-icon name="search"></ion-icon>
+    </button>
+  </form>
+
+  <div class="content users" *ngIf="users">
+    <div class="user" *ngFor='let user of users'>
+      <div class="photo" (click)="visitProfile( '/profile/visit/' + user?.id )">
+        <div></div>
+      </div>
+      <div class="info">
+        <p class="user-name" (click)="visitProfile( '/profile/visit/' + user?.id )">{{ user?.first_name }} {{ user?.last_name }}</p>
+        <p>
+          <span class="user-username">@{{ user?.username }}</span> <span class="user-type">{{ user?.carrer }}</span>
+          <button class="add" (click)="addUser( user?.id )">Adicionar</button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="system_msg" *ngIf="system_msg != null"><p>{{ system_msg }}</p></div>
+
+</ion-content>

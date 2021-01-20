@@ -1,0 +1,52 @@
+<div class="top">
+  <p>Editar perfil</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen>
+
+  <form novalidate [formGroup]="form">
+
+    <label for="firstName">
+      <p>Nome *</p>
+      <input type="text" placeholder="Nome" id="firstName" autocomplete="off" formControlName="firstName" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('firstName') ) }">
+    </label>
+
+    <label for="lastName">
+      <p>Sobrenome</p>
+      <input type="text" placeholder="Sobrenome" id="lastName" autocomplete="off" formControlName="lastName" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('lastName') ) }">
+    </label>
+
+    <label for="carrer">
+      <p>Profissão</p>
+      <input type="text" placeholder="Profissão" id="carrer" autocomplete="off" formControlName="carrer" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('carrer') ) }">
+    </label>
+
+    <label for="phoneNumber">
+      <p>Tel</p>
+      <input type="text" placeholder="(00) 98765-4321" id="phoneNumber" autocomplete="off" formControlName="phoneNumber" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('phoneNumber') ) }">
+    </label>
+
+    <label for="description">
+      <p>Sobre mim</p>
+      <input type="text" placeholder="Resumo" id="intro" autocomplete="off" formControlName="intro" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('intro') ) }">
+    </label>
+
+    <div class="submmit">
+      <p>Salvar</p>
+      <button (click)="submmit()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </div>
+
+  </form>
+  
+  <div *ngIf="msg != null">
+    {{ system_msg }}
+  </div>
+
+</ion-content>

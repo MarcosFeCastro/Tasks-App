@@ -1,0 +1,103 @@
+<div class="top">
+  <p>Home</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen>
+  <div class="response_msg" *ngIf="response_msg != null"><p>{{ response_msg }}</p></div>
+
+  <div class="divisor">
+    <p class="title">Atalhos</p>
+    <div class="shortcuts">
+      <button (click)="goToPage('/project')">Projetos</button>
+      <button (click)="goToPage('/task')">Tarefas</button>
+      <button (click)="goToPage('/contact')">Contatos</button>
+    </div>
+    <div class="shortcuts">
+      <button (click)="goToPage('/project/create')">Novo Projetos</button>
+      <button (click)="goToPage('/task/create')">Nova Tatefa</button>
+      <button (click)="goToPage('/profile')">Meu<br>Perfil</button>
+    </div>
+  </div>
+
+  <!--
+    <div class="divisor">
+      <p class="title">Notificações</p>
+      <div>
+        <p class="no-content-msg" *ngIf="notices == null">Nenhuma notificação</p>
+        <div class="card" *ngFor='let notice of notices'>
+          
+        </div>
+      </div>
+    </div>
+  -->
+
+  <div class="divisor">
+    <p class="title">Tarefas de hoje</p>
+    <div>
+      <p class="no-content-msg" *ngIf="tasks == null">Nenhuma tarefa hoje</p>
+      <div class="card" *ngFor='let task of tasks'>
+        <div class="status">
+          <div class="cicle" [ngClass]="{ 'inProgress' : task?.status == 0, 'completed' : task?.status == 1, 'expired' : task?.status == 2, 'black' : task?.status == 3 }"></div>
+        </div>
+        <div class="content" (click)="goToPage( '/task/details/'+task.id )">
+          <p class="name">{{ task.name }}</p>
+          <p class="info">@user1 - mensagens: 2</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divisor">
+    <p class="title">Projetos</p>
+    <div>
+      <p class="no-content-msg" *ngIf="projects == null">Nenhum projeto</p>
+      <div class="card" *ngFor='let project of projects'>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="divisor">
+    <p class="title">Contatos</p>
+    <div class="users">
+      <p class="no-content-msg" *ngIf="requests == null">Nenhum pedido</p>
+      <div class="user" *ngFor='let user of requests'>
+        <div class="photo" (click)="visitProfile( '/profile/visit/'+user?.id )">
+          <div></div>
+        </div>
+        <div class="info">
+          <p class="user-name" (click)="visitProfile( '/profile/visit/' + user?.id )">{{ user?.first_name }} {{ user?.last_name }} 
+            <span class="user-username">@{{ user?.username }}</span> <!-- <span class="user-type">{{ user?.carrer }}</span> -->
+          </p>
+          <div class="options">
+            <button class="btn" (click)="answerRequest( user?.id, true )">Confirmar</button>
+            <button class="btn" (click)="answerRequest( user?.id, false )">Recusar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    <div class="divisor">
+      <p class="title">Novas mensagens</p>
+      <div>
+        <p class="no-content-msg" *ngIf="projects == null">Nenhum projeto</p>
+        <div class="card" *ngFor='let message of messages'>
+          
+        </div>
+      </div>
+    </div>
+  -->
+
+  <div class="system_msg" *ngIf="system_msg != null"><p>{{ system_msg }}</p></div>
+
+  <footer></footer>
+
+</ion-content>
+

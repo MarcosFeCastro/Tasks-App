@@ -1,0 +1,94 @@
+<div class="top">
+  <p>Minhas tarefas</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen>
+  <!--
+    <form class="search">
+      <input type="text" placeholder="Buscar">
+      <button>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </form>
+    <ion-refresher slot="fixed" (ionRefresh)="reloadTasks($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  -->
+
+  <p class="tasks-date" *ngIf="todayTasks?.length > 0">Hoje</p>
+  <div>
+    <div class="card" *ngFor='let task of todayTasks'>
+      <div class="status">
+        <div class="cicle" [ngClass]="{ 'completed' : task?.status == 'completed', 'inProgress' : task?.status == 'inProgress', 'canceled' : task?.status == 'canceled', 'black' : task?.status == null, 
+          'expired' : ( task?.status == 'completed' ) && ( task?.deadline != null ) && ( task?.deadline < today ) }">
+        </div>
+      </div>
+      <div class="content" (click)="goToPage( '/task/details/'+task.id )">
+        <p class="name">{{ task.name }}</p>
+        <p class="info">@user1 - mensagens: 2</p>
+      </div>
+    </div>
+  </div>
+  
+  <p class="tasks-date" *ngIf="tomorrowTasks?.length > 0">Amanhã</p>
+  <div>
+    <div class="card" *ngFor='let task of tomorrowTasks'>
+      <div class="status">
+        <div class="cicle" [ngClass]="{ 'completed' : task?.status == 'completed', 'inProgress' : task?.status == 'inProgress', 'canceled' : task?.status == 'canceled', 'black' : task?.status == null, 
+          'expired' : ( task?.status == 'completed' ) && ( task?.deadline != null ) && ( task?.deadline < today ) }">
+        </div>
+      </div>
+      <div class="content" (click)="goToPage( '/task/details/'+task.id )">
+        <p class="name">{{ task.name }}</p>
+        <p class="info">@user1 - mensagens: 2</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="tasks-date" *ngIf="tasks?.length > 0">Outros</p>
+  <div>
+    <div class="card" *ngFor='let task of tasks'>
+      <div class="status">
+        <div class="cicle" [ngClass]="{ 'completed' : task?.status == 'completed', 'inProgress' : task?.status == 'inProgress', 'canceled' : task?.status == 'canceled', 'black' : task?.status == null, 
+          'expired' : ( task?.status == 'inProgress' ) && ( task?.deadline != null ) && ( task?.deadline < today ) }">
+        </div>
+        <!-- <div class="cicle" [ngClass]="{ 'inProgress' : task?.status == 0, 'completed' : task?.status == 1, 'expired' : task?.status == 2, 'black' : task?.status == 3, 'expired' : ( task?.deadline != null ) && ( task?.deadline < today ) }"></div> -->
+      </div>
+      <div class="content" (click)="goToPage( '/task/details/'+task.id )">
+        <p class="name">{{ task.name }}</p>
+        <p class="info">@user1 - mensagens: 2</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="system_msg" *ngIf="system_msg != null"><p>{{ system_msg }}</p></div>
+
+  <footer></footer>
+
+</ion-content>
+
+<div id="overlay" (click)="closeMenu()"></div>
+<div class="fab-btn">
+  <ion-icon name="add" id="menu-icon" (click)="showMenu()"></ion-icon>
+  <div class="fab-menu" id="fab-menu">
+    <button (click)="goToPage('/task/create')">
+      <ion-icon name="add"></ion-icon>
+      <p>Criar tarefa</p>
+    </button>
+    <button (click)="loadTasks('inProgress')">
+      <ion-icon name="reload"></ion-icon>
+      <p>Recarregar</p>
+    </button>
+    <!--
+      <button (click)="goToPage('/task')">
+        <ion-icon name="help"></ion-icon>
+        <p>Ajuda</p>
+      </button>
+    -->
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="top">
+  <p>Contatos</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen>
+  <!--
+    <form class="search">
+      <input type="text" placeholder="Buscar">
+      <button>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </form>
+  -->
+  <div class="contact-btns">
+    <!--
+      <ion-buttons (click)="createGroup()">
+        <ion-icon name="people" size="large" slot="start"></ion-icon> 
+        <p>Novo grupo</p>
+      </ion-buttons>
+    -->
+    <ion-buttons (click)="goToPage('/contact/add')">
+      <ion-icon name="person-add" size="large" slot="start"></ion-icon> 
+      <p>Novo contato</p>
+    </ion-buttons>
+  </div>
+
+  <div class="content">
+
+    <div class="contact" *ngFor="let contact of contacts">
+      <div class="photo" (click)="goToPage( '/profile/visit/' + contact.id )">
+        <div></div>
+      </div>
+      <div class="info">
+        <p><span class="member-name" (click)="goToPage( '/profile/visit/' + contact.id )">{{ contact?.first_name }} {{ contact?.last_name }}</span><br>@{{ contact?.username }} <span class="member-type">{{ user?.carrer }}</span></p>
+      </div>
+    </div>
+
+    <!--
+      <div class="contact">
+        <div class="photo">
+          <div></div>
+        </div>
+        <div class="info">
+          <p><span class="contact-name">Testando Contato</span><br><span class="contact-username">@Test1</span> <span class="contact-type">Designer</span></p>
+        </div>
+      </div>
+    -->
+
+    <div class="system_msg" *ngIf="system_msg != null"><p>{{ system_msg }}</p></div>
+  
+  </div>
+
+  <!--
+    <div class="contact-btns" [ngClass]="{ 'contact-btns-bottom' : contacts == null }">
+      <ion-buttons (click)="shareContact()">
+        <ion-icon name="share-social" size="large" slot="start"></ion-icon>
+        <p>Convidar pessoas</p>
+      </ion-buttons>
+      <ion-buttons (click)="help()">
+        <ion-icon name="help" size="large" slot="start"></ion-icon>
+        <p>Ajuda</p>
+      </ion-buttons>
+    </div>
+  -->
+
+</ion-content>
+

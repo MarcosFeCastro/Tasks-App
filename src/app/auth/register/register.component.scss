@@ -1,0 +1,36 @@
+$DRAK-GRAY-D: #434A54;
+$DRAK-GRAY-L: #656d78;
+$MEDIUM-GRAY-D: #AAB2BD;
+$MEDIUM-GRAY-L: #CCD1D9;
+$LIGHT-GRAY-D: #F5F7FA;
+$LIGHT-GRAY-L: #E6E9ED;
+$GRAPEFRUIT-D: #DA4453;
+$GRAPEFRUIT-L: #ED5565;
+$SUNFLOWER-D: #F6BB42;
+$SUNFLOWER-L: #FFCE54;
+$GRASS-D: #8CC152;
+$GRASS-L: #A0D468;
+$BLUE-JEANS-D: #4A89DC;
+$BLUE-JEANS-L: #5D9CEC;
+
+* { font-family: 'Roboto'; }
+
+form { position: fixed; left: 0; bottom: 0; width: 100%; padding: 10px 20px; margin-top: 80px;
+    h1 { text-align: center; font-size: 2.8em; margin-bottom: 15px; }
+    input { width: 100%; padding: 10px; border: none; border-bottom: 2px solid #D2D2D2; margin-bottom: 10px;
+        &:last-child { margin-bottom: 0px; }
+        &:hover { border-bottom: 2px solid $BLUE-JEANS-D; }
+        &:focus { box-shadow: 0 0 0 0; border-bottom: 2px solid $BLUE-JEANS-D; outline: 0; }
+    }
+    .invalid { border-bottom: 2px solid $GRAPEFRUIT-D; }
+    .footer { margin-top: 20px; }
+    button { float: right; width: 60px; height: 60px; border-radius: 30px;
+        &:hover { border: none; }
+        &:focus { box-shadow: 0 0 0 0; border-bottom: none; outline: 0; background-color: $DRAK-GRAY-D; color: #FFFFFF; }
+        ion-icon { font-size: 3em; }
+    }
+    .links { margin-top: 30px;
+        a { font-size: .8em; text-decoration: none; color: $DRAK-GRAY-D; }
+        .pass { float: right; }
+    }
+}

@@ -1,0 +1,217 @@
+$DRAK-GRAY-D: #434A54;
+$DRAK-GRAY-L: #656d78;
+$MEDIUM-GRAY-D: #AAB2BD;
+$MEDIUM-GRAY-L: #CCD1D9;
+$LIGHT-GRAY-D: #F5F7FA;
+$LIGHT-GRAY-L: #E6E9ED;
+$GRAPEFRUIT-D: #DA4453;
+$GRAPEFRUIT-L: #ED5565;
+$SUNFLOWER-D: #F6BB42;
+$SUNFLOWER-L: #FFCE54;
+$GRASS-D: #8CC152;
+$GRASS-L: #A0D468;
+$BLUE-JEANS-D: #4A89DC;
+$BLUE-JEANS-L: #5D9CEC;
+
+.top { z-index: 100; background-color: $DRAK-GRAY-D; color: $LIGHT-GRAY-L;
+    ion-buttons { float: left; margin: 14px; font-size: 1.2em; }
+    p { font-size: 1.4em; letter-spacing: 2px; position: absolute; margin-top: 18px; left: 50%; transform: translate(-50%, 0); }
+    ion-menu-button { float: right; font-size: 4em; margin: 6px 8px; }
+}
+
+.main-content { padding: 15px;
+    p { margin: 0px; }
+}
+
+.details { border-bottom: 2px solid $LIGHT-GRAY-L;
+    .title { font-size: 1.2em; margin-bottom: 10px; }
+    .name { font-size: 1.4em; margin-bottom: 10px; }
+    .desc { font-size: 1.1em; margin-bottom: 20px; }
+    .date { font-size: .95em; }
+    .users {
+        span { margin-right: 10px; }
+    }
+
+    .status-bar { width: 100%; margin-bottom: 10px;
+        div { width: 14px; height: 14px; border-radius: 8px; margin-right: 10px; float: left; }
+        .status { margin: -2px 0px 0px 0px; font-size: .9em; text-align: left; }
+        .date { margin: 0px 0px 0px 0px; font-size: .9em; text-align: right; }
+    }
+    // COLORS
+    .red { div { background-color: $GRAPEFRUIT-D; } .status { color: $GRAPEFRUIT-D; } }
+    .green { div { background-color: $GRASS-D; } .status { color: $GRASS-D; } }
+    .blue { div { background-color: $BLUE-JEANS-D; } .status { color: $BLUE-JEANS-D; } }
+    .black { div { background-color: $DRAK-GRAY-D; } .status { color: $DRAK-GRAY-D; } }
+
+}
+
+.comments { 
+    .title { font-size: 1.2em; margin-top: 5px; }
+    .comment-form-btn { position: absolute; right: 15px; margin-top: -26px; padding: 10px; background-color: $DRAK-GRAY-D; color: #FFFFFF; border-radius: 4px;
+        &:hover { border: none; }
+        &:focus { box-shadow: 0 0 0 0; border: none; outline: 0; }
+    }
+    .messages { margin-top: 30px;
+        .message { padding: 10px; background-color: $LIGHT-GRAY-D; border-radius: 4px; margin-top: 15px;
+            //.user {  }
+            .msg { font-size: 1.1em; margin: 8px 0px; }
+            .date { font-size: .8em; text-align: right; }
+        }
+    }
+}
+
+.system_msg { padding: 60px 0px;
+    p { text-align: center; font-size: 1.2em; }
+}
+
+
+#form-message {
+    position: absolute; width: 100%; bottom: 0px; z-index: 20; background-color: #FFFFFF; color: #434A54; box-sizing: inherit;
+    transition: max-height 200ms; overflow: hidden; max-height: 0px;
+    div { padding: 30px 20px;
+        p { margin: 0px 0px 25px 0px; font-size: 1.4em; }
+        span { position: absolute; padding: 10px; right: 10px; top: 20px; font-size: 1.8em; }
+        form { width: 100%; border-bottom: 2px solid $BLUE-JEANS-D;
+
+            &:focus { border-bottom: 2px solid $SUNFLOWER-D; }
+
+            input { width: calc( 100% - 40px ); border: none; padding: 12px 12px 10px 12px; background-color: $LIGHT-GRAY-D;
+                &:hover { border: none; }
+                &:focus { box-shadow: 0 0 0 0; border: none; outline: 0; }
+            }
+            button { width: 40px; float: right; padding: 16px 12px 10px 12px; background-color: $LIGHT-GRAY-D;
+                &:hover { border: none; }
+                &:focus { box-shadow: 0 0 0 0; border: none; outline: 0; }
+            }
+        }
+        .invalid { border-bottom: 2px solid $GRAPEFRUIT-D; }
+    }
+    
+}
+#overlay {
+    position: fixed; visibility: hidden; opacity: 0; transition: visibility 200ms, opacity 200ms linear;
+    width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.2); z-index: 9; cursor: pointer; 
+}
+
+
+footer { height: 70px; }
+.fab-btn {
+    position: fixed; text-align: right; padding: 15px; bottom: 0px; right: 0px; z-index: 10;
+    #menu-icon { padding: 10px; border-radius: 30px; background-color: $DRAK-GRAY-D; color: $LIGHT-GRAY-L; font-size: 1.6em;
+        -webkit-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); -moz-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); box-shadow: 2px 2px 10px -6px rgba(0,0,0,1);
+    }
+    .fab-menu {
+        position: absolute; width: 300px; bottom: 70px; right: 4px; z-index: 10; //background-color: #FFFFFF; bottom: 80px; right: 14px;
+        //-webkit-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); -moz-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); box-shadow: 2px 2px 10px -6px rgba(0,0,0,1);
+        transition: max-height 200ms; overflow: hidden; max-height: 0px;
+        button {
+            width: auto; margin: 0px 7px 12px 10px; background: none; padding: 0px 8px;
+            // padding: 12px 18px; border-radius: 30px; font-size: 1em; border: none; background-color: cornflowerblue; color: #FFFFFF;
+            //-webkit-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); -moz-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); box-shadow: 2px 2px 10px -6px rgba(0,0,0,1);
+            &:first-child { margin-top: 10px; }
+            &:hover { border: none; }
+            &:focus { box-shadow: 0 0 0 0; border: none; outline: 0; }
+            ion-icon { float: right; background-color: $DRAK-GRAY-D; color: $LIGHT-GRAY-L; font-size: 1.8em; padding: 8px; border-radius: 30px;
+                -webkit-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); -moz-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); box-shadow: 2px 2px 10px -6px rgba(0,0,0,1);
+            }
+            p { float: right; margin: 7px 12px 0px 0px; border-radius: 5px; padding: 7px 10px 6px 10px; background-color: #FFFFFF; color: $DRAK-GRAY-D; font-size: 1.1em; font-weight: 500;
+                -webkit-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); -moz-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); box-shadow: 2px 2px 10px -6px rgba(0,0,0,1);
+            }
+        }
+    }
+}
+
+#status-alert {
+    position: absolute; width: 80%; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 2px; z-index: 100; background-color: #FFFFFF; visibility: hidden; opacity: 0; transition: visibility 200ms, opacity 200ms linear; z-index: 10;
+    -webkit-box-shadow: 0px 8px 12px -10px rgba(0,0,0,1); -moz-box-shadow: 0px 8px 12px -10px rgba(0,0,0,1); box-shadow: 0px 8px 12px -10px rgba(0,0,0,1);
+    .alert-header { padding: 15px; border: 2px solid #FEFEFE; border-bottom: none; border-radius: 2px 2px 0px 0px; 
+        h2 { font-size: 1.4em; margin: 0px 0px 10px 0px; float: left; }
+        button { float: right; }
+    }
+    .status-btns{ margin-top: 30px;
+        button { width: 100%; padding: 18px; font-size: 1.2em; border: none; color: #FFFFFF; margin-top: 0px;
+            &:hover { border: none; }
+            &:focus { box-shadow: 0 0 0 0; outline: 0; }
+        }
+        .completed { background-color: $GRASS-D; }
+        .inProgress { background-color: $BLUE-JEANS-D; }
+        .canceled { background-color: $GRAPEFRUIT-D; border-radius: 0px 0px 2px 2px; }
+    }
+}
+
+#delete-alert {
+    position: absolute; width: 80%; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 2px; z-index: 100; background-color: #FFFFFF; visibility: hidden; opacity: 0; transition: visibility 200ms, opacity 200ms linear; z-index: 10;
+    -webkit-box-shadow: 0px 8px 12px -10px rgba(0,0,0,1); -moz-box-shadow: 0px 8px 12px -10px rgba(0,0,0,1); box-shadow: 0px 8px 12px -10px rgba(0,0,0,1);
+    .alert-header { padding: 15px; border: 2px solid #FEFEFE; border-bottom: none; border-radius: 2px 2px 0px 0px; 
+        h2 { font-size: 1.4em; margin: 0px 0px 10px 0px; }
+        P { font-size: 1.2em; margin: 0px 0px 5px 0px; }
+    }
+    button { width: 50%; padding: 18px; font-size: 1em; border: none; color: #FFFFFF;
+        &:hover { border: none; }
+        &:focus { box-shadow: 0 0 0 0; outline: 0; }
+        &:first-child { background-color: $GRAPEFRUIT-D; border-radius: 0px 0px 0px 2px; }
+        &:last-child { background-color: $BLUE-JEANS-D; border-radius: 0px 0px 2px 0px; }
+    }
+}
+
+#exit-alert {
+    position: absolute; width: 80%; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 2px; z-index: 100; background-color: #FFFFFF; visibility: hidden; opacity: 0; transition: visibility 200ms, opacity 200ms linear; z-index: 10;
+    -webkit-box-shadow: 0px 8px 12px -10px rgba(0,0,0,1); -moz-box-shadow: 0px 8px 12px -10px rgba(0,0,0,1); box-shadow: 0px 8px 12px -10px rgba(0,0,0,1);
+    .alert-header { padding: 15px; border: 2px solid #FEFEFE; border-bottom: none; border-radius: 2px 2px 0px 0px; 
+        h2 { font-size: 1.4em; margin: 0px 0px 10px 0px; }
+        P { font-size: 1.2em; margin: 0px 0px 5px 0px; }
+    }
+    button { width: 50%; padding: 18px; font-size: 1em; border: none; color: #FFFFFF;
+        &:hover { border: none; }
+        &:focus { box-shadow: 0 0 0 0; outline: 0; }
+        &:first-child { background-color: $GRAPEFRUIT-D; border-radius: 0px 0px 0px 2px; }
+        &:last-child { background-color: $BLUE-JEANS-D; border-radius: 0px 0px 2px 0px; }
+    }
+}
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    //display: none; /* Hidden by default */
+    visibility: hidden; opacity: 0; transition: visibility 200ms, opacity 200ms linear; // 
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.2); /* Black background with opacity */
+    z-index: 9; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+#overlay2 {
+    position: fixed; /* Sit on top of the page content */
+    //display: none; /* Hidden by default */
+    visibility: hidden; opacity: 0; transition: visibility 200ms, opacity 200ms linear; // 
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.2); /* Black background with opacity */
+    z-index: 9; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+#list-contacts { position: fixed; width: 100%; bottom: 0; background-color: #FFFFFF; color: $DRAK-GRAY-D; z-index: 11; border-radius: 18px 18px 0px 0px; //height: 450px;
+    -webkit-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); -moz-box-shadow: 2px 2px 10px -6px rgba(0,0,0,1); box-shadow: 2px 2px 10px -6px rgba(0,0,0,1);
+    transition: height 200ms; overflow: hidden; height: 0px;
+    overflow-y: auto;
+    &::-webkit-scrollbar { display: none; }
+    .scroll-item { flex: 0 0 auto; }
+    .list-contacts-header { padding: 20px;
+        p { font-size: 1.6em; margin: 0px; }
+        span { position: absolute; right: 10px; margin-top: -35px; font-size: 1.8em; padding: 5px; z-index: 5; }
+    }
+    .contact { padding: 10px 15px 10px 15px; margin-bottom: 0px; border-bottom: 2px solid #EFEFEF;
+        &:last-child { border-bottom: none; padding-bottom: 25px; }
+        &:first-child { border-top: 2px solid #EFEFEF; }
+        .photo { width: 50px; height: 50px; border-radius: 30px; float: left; margin-right: 15px; background-color: $LIGHT-GRAY-L; }
+        .info { height: 50px;
+            p { margin: 3px 0px 0px 0px; padding: 0px; font-size: 1em; line-height: 22px; }
+            .contact-name { font-size: 1.4em; }
+            .contact-username { font-size: 1em; }
+            .contact-type { margin-left: 10px; font-size: .8em; text-transform: uppercase; letter-spacing: 1.6px; }
+        }
+    }
+}

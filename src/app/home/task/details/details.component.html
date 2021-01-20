@@ -1,0 +1,171 @@
+<div class="top">
+  <ion-buttons slot="start" (click)="closePage()">
+    <ion-icon name="arrow-back" size="large" slot="start" class="close-project"></ion-icon>
+  </ion-buttons>
+  <p *ngIf="taskId == null; else update">Nova tarefa</p>
+  <ng-template #update>
+    <p>Tarefa</p>
+  </ng-template>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<div id="delete-alert">
+  <div class="alert-header">
+    <h2>Confirmar</h2>
+    <p>Deseja deletar esse projeto?</p>
+  </div>
+  <div>
+    <button (click)="presentDeleteAlert()">Cancelar</button>
+    <button (click)="deleteTask( task?.id )">Confirmar</button>
+  </div>
+</div>
+
+<div id="status-alert">
+  <div class="alert-header">
+    <h2>Status</h2>
+    <button (click)="presentStatusAlert()">Cancelar</button>
+  </div>
+  <div class="status-btns">
+    <button class="completed" (click)="setStatus( 'completed' )">Concluída</button>
+    <button class="inProgress" (click)="setStatus( 'inProgress' )">Fazendo</button>
+    <button class="canceled" (click)="setStatus( 'canceled' )">Cancelada</button>
+  </div>
+</div>
+
+<ion-content fullscreen>
+
+  <div class="main-content details">
+    <!-- <p class="title">Tarefa</p> -->
+    <!-- <p class="status">{{ task?.status }}</p> -->
+    <div class="status-bar" [ngClass]="{ 'red' : task?.status == 'canceled', 'green' : task?.status == 'completed', 'blue' : task?.status == 'inProgress', 'black' : task?.status == null }" *ngIf="task?.status">
+      <div></div> <p class="status">
+        <span *ngIf="task?.status == 'inProgress'">Fazendo</span>
+        <span *ngIf="task?.status == 'completed'">Concluída</span>
+        <span *ngIf="task?.status == 'canceled'">Cancelada</span>
+      </p>
+    </div>
+    <p class="name">{{ task?.name }}</p>
+    <p class="desc">{{ task?.description }}</p>
+    <p class="date">{{ task?.deadline | date:'dd/MM/yyyy' }}</p>
+    <p class="users">
+      <span *ngFor="let user of task?.users">@{{ user?.username }}</span>
+    </p>
+  </div>
+
+  <div class="main-content comments">
+    <p class="title">Comentários</p>
+    <button class="comment-form-btn" (click)="showFormMessage()">Comentar</button>
+
+    <div class="messages">
+      <div class="message" *ngFor="let comment of task?.comments">
+        <p class="user">{{ comment.first_name }} {{ comment.last_name }}</p>
+        <p class="msg">- {{ comment.message }}</p>
+        <p class="date">{{ comment.created_at | date:'hh:mm - dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="system_msg" *ngIf="system_msg != null"><p>{{ system_msg }}</p></div>
+
+  <footer></footer>
+
+</ion-content>
+
+<div id="overlay" (click)="closeAlerts()"></div>
+<div id="form-message">
+  <div>
+    <p>Comentário</p>
+    <span (click)="closeFormMessage()">
+      <ion-icon name="close-circle"></ion-icon>
+    </span>
+    <form novalidate [formGroup]="formMessage" [ngClass]="{ 'invalid' : ( formMessageSubmitted && hasErrorForm('message') ) }">
+      <label for="name">
+        <input type="text" placeholder="Faça seu comentário" id="message" autocomplete="off" formControlName="message">
+      </label>
+      <button type="submit" (click)="submmit()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="overlay2" (click)="closeMenu()"></div>
+<div class="fab-btn">
+  <ion-icon name="add" id="menu-icon" (click)="showMenu()"></ion-icon>
+  <div class="fab-menu" id="fab-menu">
+    
+    <button (click)="showFormMessage()">
+      <ion-icon name="add"></ion-icon>
+      <p>Comentar</p>
+    </button>
+
+    <button (click)="showUsers()" *ngIf="( task?.user_type == 'admin' ) && projectId">
+      <ion-icon name="add"></ion-icon>
+      <p>Adicionar membro</p>
+    </button>
+
+    <button (click)="presentStatusAlert()" *ngIf="task?.user_type == 'admin'">
+      <ion-icon name="add"></ion-icon>
+      <p>Mudar status</p>
+    </button>
+
+    <button *ngIf="( task?.user_type == 'admin' ) && projectId; else editTask" (click)="goToPage( '/project/' + projectId + '/task/update/' + taskId )">
+      <ion-icon name="pencil"></ion-icon>
+      <p>Editar tarefa</p>
+    </button>
+    <ng-template #editTask>
+      <button (click)="goToPage( '/task/update/' + taskId )" *ngIf="task?.user_type == 'admin'">
+        <ion-icon name="pencil"></ion-icon>
+        <p>Editar tarefa</p>
+      </button>
+    </ng-template>
+
+    <button (click)="presentDeleteAlert()" *ngIf="task?.user_type == 'admin'">
+      <ion-icon name="trash"></ion-icon>
+      <p>Deletar tarefa</p>
+    </button>
+    <button (click)="loadTask()">
+      <ion-icon name="reload"></ion-icon>
+      <p>Recarregar</p>
+    </button>
+    <!--
+      <button (click)="goToPage('/project')">
+        <ion-icon name="help"></ion-icon>
+        <p>Ajuda</p>
+      </button>
+    -->
+  </div>
+</div>
+
+<div id="list-contacts" scrollY="true">
+  <div class="list-contacts-header">
+    <p *ngIf="projectId == null; else members">Contatos</p>
+    <ng-template #members>
+      <p>Membros</p>
+    </ng-template>
+    <span (click)="showUsers()">
+      <ion-icon name="close-sharp"></ion-icon>
+    </span>
+  </div>
+
+  <div class="contact" *ngFor="let user of users">
+    <div class="photo">
+      <div></div>
+    </div>
+    <div class="info">
+      <p><span class="contact-name">{{ user?.first_name }} {{ user?.last_name }}</span><br><span class="contact-username">@{{ user?.username }}</span> <span class="contact-type">{{ user?.carrer }}</span></p>
+    </div>
+    <button (click)="selectUser( user )">Adicionar</button>
+  </div>
+
+  <div class="system_msg" *ngIf="users == null">
+    <p *ngIf="projectId == null; else projectContacts">Nenhum contato encontrado</p>
+    <ng-template #projectContacts>
+      <p>Nenhum membro encontrado</p>
+    </ng-template>
+  </div>
+</div>

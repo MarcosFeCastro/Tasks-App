@@ -1,27 +1,17 @@
-#container {
-  text-align: center;
+* { font-family: 'Roboto'; }
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-menu { z-index: 1000000000; }
+
+ion-title { color: cornflowerblue; }
+
+ion-item{ border-bottom: 1px solid #DEDEDE;
+  &:last-child{ border-bottom: none; }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+.list-item{ --border-style: none }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+.ion-icon-close { margin-right: 12px; }
 
-  color: #8c8c8c;
+.ion-icon-exit { --ionicon-stroke-width: 64px; }
 
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
+.ion-icon-favorite { --ionicon-stroke-width: 64px; margin-right: 16px; }

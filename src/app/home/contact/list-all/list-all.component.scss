@@ -1,0 +1,58 @@
+$DRAK-GRAY-D: #434A54;
+$DRAK-GRAY-L: #656d78;
+$MEDIUM-GRAY-D: #AAB2BD;
+$MEDIUM-GRAY-L: #CCD1D9;
+$LIGHT-GRAY-D: #F5F7FA;
+$LIGHT-GRAY-L: #E6E9ED;
+$GRAPEFRUIT-D: #DA4453;
+$GRAPEFRUIT-L: #ED5565;
+$SUNFLOWER-D: #F6BB42;
+$SUNFLOWER-L: #FFCE54;
+$GRASS-D: #8CC152;
+$GRASS-L: #A0D468;
+$BLUE-JEANS-D: #4A89DC;
+$BLUE-JEANS-L: #5D9CEC;
+
+.top { z-index: 100; background-color: $DRAK-GRAY-D; color: $LIGHT-GRAY-L;
+    p { font-size: 1.4em; letter-spacing: 2px; position: absolute; margin-top: 18px; margin-left: 18px; }
+    ion-menu-button { float: right; font-size: 4em; margin: 6px 8px; }
+}
+ion-spinner { position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin-left: -20px; margin-top: -20px; z-index: 100; }
+
+.search { width: 100%; background-color: #FEFEFE; margin-bottom: 15px;
+    input { border: none; font-size: 1.2em; background-color: #FEFEFE; padding: 16px 14px 14px 18px;
+        &:hover { border-bottom: none; }
+        &:focus { box-shadow: 0 0 0 0; border-bottom: none; outline: 0; }
+    }
+    button { float: right; padding: 16px 18px 8px 12px; font-size: 1.4em; background-color: #FEFEFE;
+        &:hover { border-bottom: none; }
+        &:focus { box-shadow: 0 0 0 0; border-bottom: none; outline: 0; }
+    }
+}
+
+.content { margin-top: 15px;
+    .contact { padding: 10px 20px 10px 20px; margin-bottom: 0px; border-bottom: 2px solid #EFEFEF;
+        //&:last-child { border-bottom: none; }
+        &:first-child { border-top: 2px solid #EFEFEF; }
+        .photo { width: 50px; height: 50px; border-radius: 30px; float: left; margin-right: 20px; background-color: $LIGHT-GRAY-D; }
+        .info { height: 50px;
+            p { margin: 0px; padding: 0px; font-size: 1em; line-height: 25px; }
+            .contact-name { font-size: 1em; }
+            .contact-username { font-size: .8em; }
+            .contact-type { margin-left: 10px; font-size: .8em; text-transform: uppercase; letter-spacing: 1.6px; }
+        }
+    }
+}
+
+.contact-btns { padding: 0px 0px 0px 28px;
+    ion-buttons { margin: 15px 0px; padding: 0px;
+        ion-icon { margin-right: 30px; }
+        p { font-size: 1em; margin: 0px; padding: 0px; }
+    }
+}
+
+.contact-btns-bottom { position: absolute; bottom: 0px; }
+
+.system_msg { padding: 60px 0px;
+    p { text-align: center; font-size: 1.2em; }
+}

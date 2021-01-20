@@ -1,0 +1,94 @@
+<div class="top" (click)="closeMenu()">
+  <p>Projetos</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen (click)="closeMenu()">
+  <!--
+    <form class="search">
+      <input type="text" placeholder="Buscar">
+      <button>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </form>
+  -->
+
+  <div class="filters">
+    <div class="primary" scrollX="true">
+      <button [ngClass]="{ 'selected' : primaryFilter == 'group' }" (click)="setPrimaryFilter('group')">Em grupo</button>
+      <button [ngClass]="{ 'selected' : primaryFilter == 'my' }" (click)="setPrimaryFilter('my')">Meus projetos</button>
+    </div>
+    <div class="secundary" scrollX="true">
+      <button [ngClass]="{ 'selected' : secundaryFilter == 'all' }" (click)="setSecundaryFilter('all')">Todos</button>
+      <!-- <button [ngClass]="{ 'selected' : secundaryFilter == 'favorite' }" (click)="setSecundaryFilter('favorite')">Favoritos</button> -->
+      <button [ngClass]="{ 'selected' : secundaryFilter == 'inProgress' }" (click)="setSecundaryFilter('inProgress')">Em Progresso</button>
+      <button [ngClass]="{ 'selected' : secundaryFilter == 'completed' }" (click)="setSecundaryFilter('completed')">Concluídos</button>
+      <button [ngClass]="{ 'selected' : secundaryFilter == 'canceled' }" (click)="setSecundaryFilter('canceled')">Cancelados</button>
+    </div>
+  </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="reloadProjects($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div *ngFor='let project of projects'>
+    <div class="card" (click)="openProject( project.id )">
+      <div class="card-header" [ngClass]="{ 'red' : project?.status == 'canceled', 'green' : project?.status == 'completed', 'blue' : project?.status == 'inProgress', 'black' : project?.status == null }">
+        <div></div> <p class="status">
+          <span *ngIf="project.status == 'inProgress'">Em Progresso</span>
+          <span *ngIf="project.status == 'completed'">Concluído</span>
+          <span *ngIf="project.status == 'canceled'">Cancelado</span>
+        </p>
+        <p class="date">{{ project?.created_at | date:'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="card-content">
+        <p class="name">{{ project.name }}</p>
+        <!-- <p class="info">Tarefas: <span>4</span> | Membros: <span>7</span></p> -->
+        <ion-icon name="chevron-forward" class="btn"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="system_msg" *ngIf="system_msg != null">
+    <p>{{ system_msg }}</p>
+  </div>
+
+  <footer>
+    
+  </footer>
+</ion-content>
+
+<div id="overlay" (click)="closeMenu()"></div>
+<div class="fab-btn">
+  <ion-icon name="add" id="menu-icon" (click)="showMenu()"></ion-icon>
+  <div class="fab-menu" id="fab-menu">
+    <button (click)="goToPage('/project/create')">
+      <ion-icon name="add"></ion-icon>
+      <p>Criar projeto</p>
+    </button>
+    <button (click)="loadProjects()">
+      <ion-icon name="reload"></ion-icon>
+      <p>Recarregar</p>
+    </button>
+    <!--
+      <button (click)="goToPage('/project')">
+        <ion-icon name="help"></ion-icon>
+        <p>Ajuda</p>
+      </button>
+    -->
+  </div>
+</div>
+
+<!--
+  <ion-tab-bar slot="bottom">
+    <button>Ajuda</button>
+    <button class="save" (click)="goToPage('/project/create')">
+      <span><ion-icon name="add-circle-sharp" slot="start" size="large"></ion-icon></span>
+      Novo Projeto
+    </button>
+  </ion-tab-bar>
+-->

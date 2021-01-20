@@ -1,0 +1,57 @@
+
+<ion-content fullscreen>
+
+  <form novalidate [formGroup]="loginForm">
+
+    <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          <h1>Login</h1>
+        </ion-col>
+      </ion-row>
+      <div class="msg-form-error" *ngIf="invalidLogin">
+        Email ou senha inválidos!
+      </div>
+      <ion-row>
+        <ion-col>
+          <!-- <input type="text" name="" id="username" placeholder="Email" autocomplete="off" formControlName="username" [ngClass]=" ( loginSubmitted == true && hasErrorLogin('username') == true ) ? 'invalid' : '' "> -->
+          <input type="text" name="" id="username" placeholder="Email" autocomplete="off" formControlName="username" [ngClass]="{ 'invalid' : ( loginSubmitted && hasErrorLogin('username') ) }">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <input type="password" name="" id="password" placeholder="Senha" autocomplete="off" formControlName="password" [ngClass]="{ 'invalid' : ( loginSubmitted && hasErrorLogin('password') ) }">
+        </ion-col>
+      </ion-row>
+      <ion-row class="footer">
+        <ion-col>
+          <!-- Entrar -->
+        </ion-col>
+        <ion-col>
+          <button (click)="login()">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="links">
+        <ion-col>
+          <a (click)="goToPage('/auth/register')">Cadastrar-se</a>
+        </ion-col>
+        <ion-col>
+          <a href="/auth/login" class="pass">Esqueceu a senha?</a>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </form>
+
+  <!-- Linha Botton -->
+  <img src="/assets/img/line-botton.svg" alt="" class="line-botton">
+
+  <!-- Circles Botton -->
+  <img src="/assets/img/circles.svg" alt="" class="circles-botton">
+
+</ion-content>

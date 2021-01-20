@@ -1,0 +1,100 @@
+<div class="top">
+  <ion-buttons slot="start" (click)="cancel()">
+    <ion-icon name="arrow-back" size="large" slot="start" class="close-project"></ion-icon>
+  </ion-buttons>
+  <p *ngIf="taskId == null; else update">Nova tarefa</p>
+  <ng-template #update>
+    <p>Editar tarefa</p>
+  </ng-template>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-content fullscreen>
+  
+  <form novalidate [formGroup]="form">
+
+    <label for="name">
+      <p>Título *</p>
+      <input type="text" placeholder="Título da tarefa" id="name" autocomplete="off" formControlName="name" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('name') ) }">
+    </label>
+
+    <label for="description">
+      <p>Descrição</p>
+      <input type="text" placeholder="Descrição do projeto" id="description" autocomplete="off" formControlName="description" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('description') ) }">
+    </label>
+
+    <label for="deadline">
+      <p>Prazo</p>
+      <ion-datetime placeholder="Prazo de conclusão" id="deadline" autocomplete="off" formControlName="deadline" min="2020" max="2200" [dayShortNames]="customDayShortNames" displayFormat="DD / MMM / YYYY" monthShortNames="JAN, FEV, MAR, ABR, MAI, JUN, JUL, AGO, SET, OUT, NOV, DEZ"></ion-datetime>
+      <span (click)="cleanDeadline()">
+        <ion-icon name="close-sharp"></ion-icon>
+      </span>
+    </label>
+
+  </form>
+
+  <div class="staff" *ngIf="projectId != null && projectId != undefined">
+    <div class="staff-top">
+      <p>Membros</p>
+      <p class="more" (click)="showUsers()">Ver todos</p>
+    </div>
+    <div class="list" scrollX="true">
+      
+      <div class="no-selection" *ngIf="selectedUsers.length == 0">
+        <p *ngIf="projectId == null; else memberSelected">Nenhum contato selecionado</p>
+        <ng-template #memberSelected>
+          <p>Nenhum membro selecionado</p>
+        </ng-template>
+      </div>
+
+      <div class="item" *ngFor="let user of selectedUsers">
+        <div></div>
+        <p>{{ user?.first_name }} {{ user?.last_name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="submmit">
+    <p *ngIf="taskId == null; else save">Cadastrar</p>
+    <ng-template #save>
+      <p>Salvar</p>
+    </ng-template>
+    <button (click)="submmit()">
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+  </div>
+
+  <div class="system_msg" *ngIf="system_msg != null"><p>{{ system_msg }}</p></div>
+  
+</ion-content>
+
+<div id="list-contacts" scrollY="true">
+  <div class="list-contacts-header">
+    <p *ngIf="projectId == null; else members">Contatos</p>
+    <ng-template #members>
+      <p>Membros</p>
+    </ng-template>
+    <span (click)="showUsers()">
+      <ion-icon name="close-sharp"></ion-icon>
+    </span>
+  </div>
+
+  <div class="contact" *ngFor="let user of users">
+    <div class="photo">
+      <div></div>
+    </div>
+    <div class="info">
+      <p><span class="contact-name">{{ user?.first_name }} {{ user?.last_name }}</span><br><span class="contact-username">@{{ user?.username }}</span> <span class="contact-type">{{ user?.carrer }}</span></p>
+    </div>
+    <button (click)="selectUser( user )">Adicionar</button>
+  </div>
+
+  <div class="system_msg" *ngIf="users == null">
+    <p *ngIf="projectId == null; else projectContacts">Nenhum contato encontrado</p>
+    <ng-template #projectContacts>
+      <p>Nenhum membro encontrado</p>
+    </ng-template>
+  </div>
+</div>

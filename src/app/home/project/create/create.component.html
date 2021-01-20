@@ -1,0 +1,84 @@
+<div class="top">
+  <ion-buttons slot="start" (click)="cancel()">
+    <ion-icon name="arrow-back" size="large" slot="start" class="close-project"></ion-icon>
+  </ion-buttons>
+  <p *ngIf="projectId == null; else update">Novo projeto</p>
+  <ng-template #update>
+    <p>Editar projeto</p>
+  </ng-template>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-content fullscreen>
+  
+  <form novalidate [formGroup]="form">
+
+    <label for="name">
+      <p>Nome *</p>
+      <input type="text" placeholder="Nome do projeto" id="name" autocomplete="off" formControlName="name" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('name') ) }">
+    </label>
+
+    <!--
+      <label for="status">
+        <p>Status *</p>
+        <select name="status" id="status" formControlName="status" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('status') ) }">
+          <option value="0" selected>Valor 0</option> 
+          <option value="1">Valor 1</option>
+          <option value="2">Valor 2</option>
+          <option value="3">Valor 3</option>
+        </select>
+      </label>
+    -->
+
+    <label for="description">
+      <p>Descrição</p>
+      <input type="text" placeholder="Descrição do projeto" id="description" autocomplete="off" formControlName="description" [ngClass]="{ 'invalid' : ( formSubmitted && hasErrorForm('description') ) }">
+    </label>
+
+    <label for="deadline">
+      <p>Prazo</p>
+      <ion-datetime placeholder="Prazo de conclusão" id="deadline" autocomplete="off" formControlName="deadline" min="2020" max="2200" [dayShortNames]="customDayShortNames" displayFormat="DD / MMM / YYYY" monthShortNames="JAN, FEV, MAR, ABR, MAI, JUN, JUL, AGO, SET, OUT, NOV, DEZ"></ion-datetime>
+      <span (click)="cleanDeadline()">
+        <ion-icon name="close-sharp"></ion-icon>
+      </span>
+    </label>
+
+    <div class="submmit">
+      <p *ngIf="projectId == null; else save">Cadastrar</p>
+      <ng-template #save>
+        <p>Salvar</p>
+      </ng-template>
+      <button (click)="submmit()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </div>
+
+  </form>
+  
+  <div *ngIf="msg != null">
+    {{ system_msg }}
+  </div>
+  
+</ion-content>
+
+<!--
+<ion-tab-bar slot="bottom">
+  <button (click)="cancel()">
+    <span>
+      <ion-icon name="close-sharp" slot="start" size="large"></ion-icon>
+    </span>
+    <p>Cancelar</p>
+  </button>
+  <button class="save" (click)="submmit()">
+    <span class="icon">
+      <ion-icon name="checkmark-sharp" slot="start" size="large"></ion-icon>
+    </span>
+    <p *ngIf="projectId == null; else updatebtn">Criar</p>
+    <ng-template #updatebtn>
+      <p>Salvar</p>
+    </ng-template>
+  </button>
+</ion-tab-bar>
+-->

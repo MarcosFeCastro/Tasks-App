@@ -1,0 +1,203 @@
+<div class="top" (click)="closeMenu()">
+  <ion-buttons slot="start" (click)="goToPage('/project')">
+    <ion-icon name="arrow-back" size="large" slot="start" class="close-project"></ion-icon>
+  </ion-buttons>
+  <p>Projeto</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<div id="overlay" (click)="closeAlerts()"></div>
+<!-- <div class="delete-alert" id="delete-alert" *ngIf="delete_alert"> -->
+<div id="delete-alert">
+  <div class="alert-header">
+    <h2>Confirmar</h2>
+    <p>Deseja deletar esse projeto?</p>
+  </div>
+  <div>
+    <button (click)="presentDeleteAlert()">Cancelar</button>
+    <button (click)="deleteProject( project?.id )">Confirmar</button>
+  </div>
+</div>
+<div id="exit-alert">
+  <div class="alert-header">
+    <h2>Confirmar</h2>
+    <p>Deseja sair do projeto?</p>
+  </div>
+  <div>
+    <button (click)="presentExitAlert()">Cancelar</button>
+    <button (click)="exitProject( project?.id )">Confirmar</button>
+  </div>
+</div>
+
+<div id="status-alert">
+  <div class="alert-header">
+    <h2>Status</h2>
+    <button (click)="presentStatusAlert()">Cancelar</button>
+  </div>
+  <div class="status-btns">
+    <button class="completed" (click)="setStatus( 'completed' )">Concluído</button>
+    <button class="inProgress" (click)="setStatus( 'inProgress' )">Em progresso</button>
+    <button class="canceled" (click)="setStatus( 'canceled' )">Cancelad0</button>
+  </div>
+</div>
+
+<ion-content fullscreen>
+  
+  <div class="header">
+
+    <div class="name">
+      <p>{{ project?.name }}</p>
+      <ion-buttons (click)="openConfigs()" *ngIf="project?.user_type == 1">
+        <!-- <ion-icon name="ellipsis-vertical" slot="end"></ion-icon> -->
+        <ion-icon name="settings-sharp" slot="end"></ion-icon>
+      </ion-buttons>
+    </div>
+    <div class="desc">
+      <p>{{ project?.description }}</p>
+    </div>
+
+  </div>
+
+  <div class="segment">
+    <button (click)="setSegment(true)" [ngClass]="{ 'selected' : segment }">Tarefas</button>
+    <button (click)="setSegment(false)" [ngClass]="{ 'selected' : !segment }">Membros</button>
+  </div>
+
+  <div class="content tasks" *ngIf="segment">
+
+    <!-- 
+      <div class="task-group">
+        <div class="task-group-name"><p>Grupo 1</p></div>
+        <div class="task">
+          <div class="task-name" (click)="showDetails( 'task1' )">
+            <p>Tarefa 1 <span><ion-icon name="caret-down"></ion-icon></span></p> 
+            <p>Tarefa 1 <span (click)="openTask()"><ion-icon name="caret-up"></ion-icon></span></p>
+          </div>
+          <div class="task-details" id="task1">
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <p>Prazo: 20/08/2020</p>
+            <p>@user1, @user2, @user3</p>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-name" (click)="showDetails( 'task2' )"> <p>Tarefa 2 <span><ion-icon name="caret-down"></ion-icon></span></p> </div>
+          <div class="task-details" id="task2">
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <p>Prazo: 20/08/2020</p>
+            <p>@user1, @user2, @user3</p>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-name" (click)="showDetails( 'task3' )"> <p>Tarefa 3 <span><ion-icon name="caret-down"></ion-icon></span></p> </div>
+          <div class="task-details" id="task3">
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <p>Prazo: 20/08/2020</p>
+            <p>@user1, @user2, @user3</p>
+          </div>
+        </div>
+      </div>
+    -->
+
+    <div class="task-group">
+      <!-- <div class="task-group-name"><p>Grupo 2</p></div> -->
+      <div class="task" *ngFor="let task of project?.tasks">
+        <div class="task-name" (click)="showDetails( 'task'+task?.id )"> <p>{{ task?.name }} <span><ion-icon name="caret-down"></ion-icon></span></p> <!-- <p>Tarefa 1 <span (click)="openTask()"><ion-icon name="caret-up"></ion-icon></span></p> --> </div>
+        
+        <div class="task-details" id="task{{ task?.id }}">
+
+          <p class="description" *ngIf="task?.description">{{ task?.description }}</p>
+          <div class="dates">
+            <p>Data: {{ task?.created_at | date:'dd/MM/yyyy' }}</p>
+          </div>
+          <div class="dates">
+            <p *ngIf="task?.deadline; else deadlineNull">Prazo: {{ task?.deadline }}</p>
+            <ng-template #deadlineNull>
+              <p>Prazo: indefinido</p>
+            </ng-template>
+          </div>
+          <!-- <p class="usernames">@user1, @user2, @user3</p> -->
+
+          <div class="btns">
+            <!-- <button (click)="goToPage( '/project/' + projectId + '/task/update/' + task?.id )">Editar</button> -->
+            <button (click)="goToPage( '/project/' + projectId + '/task/details/' + task?.id )">Abrir</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="content staff" *ngIf="!segment">
+
+    <div class="member" *ngFor="let user of project?.users">
+      <div class="photo" (click)="goToPage( '/project/' + projectId + '/profile/' + user.id )">
+        <div></div>
+      </div>
+      <div class="info">
+        <p><span class="member-name" (click)="openProfile( user.id )">{{ user?.first_name }} {{ user?.last_name }}</span><br>@{{ user?.username }} <span class="member-type">{{ user?.type }}</span></p>
+      </div>
+    </div>
+
+  </div>
+  
+  <!-- <div *ngIf="msg != null">{{ system_msg }}</div> -->
+
+  <footer></footer>
+
+</ion-content>
+
+<div id="overlay2" (click)="closeMenu()"></div>
+<div class="fab-btn">
+  <ion-icon name="add" id="menu-icon" (click)="showMenu()"></ion-icon>
+  <div class="fab-menu" id="fab-menu">
+    <button (click)="goToPage( 'project/' + project.id + '/task/create' )" *ngIf="project?.user_type == 'admin'">
+      <ion-icon name="add"></ion-icon>
+      <p>Nova tarefa</p>
+    </button>
+    <!--
+      <button (click)="goToPage('/project/create')" *ngIf="project?.user_type == 1">
+        <ion-icon name="add"></ion-icon>
+        <p>Novo grupo de tarefas</p>
+      </button>
+    -->
+    <button (click)="goToPage('/project/'+project.id+'/invite')" *ngIf="project?.user_type == 'admin'">
+      <ion-icon name="add"></ion-icon>
+      <p>Convidar usuário</p>
+    </button>
+
+    <button (click)="presentStatusAlert()" *ngIf="project?.user_type == 'admin'">
+      <ion-icon name="add"></ion-icon>
+      <p>Mudar status</p>
+    </button>
+
+    <button (click)="goToPage('/project/update/'+projectId)" *ngIf="project?.user_type == 'admin'">
+      <ion-icon name="pencil"></ion-icon>
+      <p>Editar projeto</p>
+    </button>
+    <button (click)="presentDeleteAlert()" *ngIf="project?.user_type == 'admin'">
+      <ion-icon name="trash"></ion-icon>
+      <p>Deletar projeto</p>
+    </button>
+    <button (click)="presentExitAlert()">
+      <ion-icon name="exit"></ion-icon>
+      <p>Deixar projeto</p>
+    </button>
+    <button (click)="loadProject()">
+      <ion-icon name="reload"></ion-icon>
+      <p>Recarregar</p>
+    </button>
+    <!--
+      <button (click)="goToPage('/project')">
+        <ion-icon name="help"></ion-icon>
+        <p>Ajuda</p>
+      </button>
+    -->
+  </div>
+</div>

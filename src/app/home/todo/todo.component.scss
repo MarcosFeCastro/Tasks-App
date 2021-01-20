@@ -1,0 +1,83 @@
+$DRAK-GRAY-D: #434A54;
+$DRAK-GRAY-L: #656d78;
+$MEDIUM-GRAY-D: #AAB2BD;
+$MEDIUM-GRAY-L: #CCD1D9;
+$LIGHT-GRAY-D: #F5F7FA;
+$LIGHT-GRAY-L: #E6E9ED;
+$GRAPEFRUIT-D: #DA4453;
+$GRAPEFRUIT-L: #ED5565;
+$SUNFLOWER-D: #F6BB42;
+$SUNFLOWER-L: #FFCE54;
+$GRASS-D: #8CC152;
+$GRASS-L: #A0D468;
+$BLUE-JEANS-D: #4A89DC;
+$BLUE-JEANS-L: #5D9CEC;
+
+.top { z-index: 100; background-color: $DRAK-GRAY-D; color: $LIGHT-GRAY-L;
+    p { font-size: 1.4em; letter-spacing: 2px; position: absolute; margin-top: 18px; margin-left: 18px; }
+    ion-menu-button { float: right; font-size: 4em; margin: 6px 8px; }
+}
+
+.divisor { margin-bottom: 40px;
+    .title { font-size: 1.5em; margin: 20px 0px 20px 20px; }
+    .no-content-msg { margin: 0px 0px 0px 49px; }
+}
+
+.shortcuts { margin-bottom: 20px; text-align: center;
+    button { min-width: 80px; max-width: 80px; min-height: 75px; max-height: 75px; margin-right: 20px; padding: 8px; border-radius: 8px; text-align: center; line-height: 1.6em;
+        background-color: $DRAK-GRAY-D; color: #FFFFFF;
+        &:hover { border: none; }
+        &:focus { box-shadow: 0 0 0 0; border: none; outline: 0; }
+        &:last-child { margin-right: 0px; }
+    }
+}
+
+.tasks-date { font-size: 1.5em; margin: 30px 0px 10px 49px; }
+.card { border-top: 2px solid #EFEFEF;
+    &:last-child { border-bottom: 2px solid #EFEFEF; }
+    .status { padding: 11px 15px 0px 15px; float: left;
+        .cicle { width: 20px; height: 20px; border-radius: 20px; padding: 0px; border: 2px solid black; }
+        // COLORS
+        .inProgress { border: 2px solid $GRASS-D; }
+        .completed { border: 2px solid $BLUE-JEANS-D; }
+        .expired { border: 2px solid $GRAPEFRUIT-D; }
+    }
+    .content { padding: 10px 0px 10px 0px;
+        p { margin: 0px; }
+        .name { margin-bottom: 5px; font-size: 1.2em; }
+        .info { font-size: .9em; margin-left: 50px; }
+    }
+}
+
+.users { margin-top: 15px;
+    .users-header { font-size: 1.4em; padding: 20px; }
+    .user { padding: 15px 12px 15px 12px; margin-bottom: 0px; border-bottom: 2px solid #EFEFEF;
+        &:last-child { border-bottom: none; }
+        .photo { width: 50px; height: 50px; border-radius: 30px; float: left; margin-right: 12px; background-color: #EFEFEF; }
+        .info {
+            p { margin: 0px; padding: 0px; font-size: 1em; line-height: 20px; }
+            .user-name { font-size: 1.2em; margin-bottom: 12px; }
+            .user-username { font-size: .9em; margin-left: 12px; }
+            .user-type { margin-left: 5px; font-size: .8em; text-transform: uppercase; font-weight: 700; }
+        }
+        .options { text-align: left;
+            .btn { margin-right: 12px; padding: 9px 16px 8px 16px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; font-size: .7em;
+                &:hover { border: none; }
+                &:focus { box-shadow: 0 0 0 0; border: none; outline: 0; }
+                &:first-child { background-color: $BLUE-JEANS-D; color: #FFFFFF; }
+                &:last-child { background-color: $LIGHT-GRAY-L; color: $DRAK-GRAY-D; padding: 8px 15px 7px 15px; border: 1px solid $MEDIUM-GRAY-D; }
+            }
+        }
+    }
+}
+
+
+.system_msg { padding: 60px 0px;
+    p { text-align: center; font-size: 1.2em; }
+}
+
+.response_msg { position: fixed; width: 100%; background-color: $BLUE-JEANS-D; color: #FFFFFF; padding: 10px; transition: all 1s;
+    p { text-align: center; font-size: 1em; margin: 0px; }
+}
+
+footer { height: 30px; }

@@ -1,0 +1,56 @@
+<div class="top-with-btn" *ngIf="projectId; else noProject">
+  <ion-buttons slot="start" (click)="goToPage( '/project/details/' + projectId )">
+    <ion-icon name="arrow-back" size="large" slot="start" class="close-project"></ion-icon>
+  </ion-buttons>
+  <p>Perfil</p>
+  <ion-menu-button slot="end">
+    <ion-icon name="menu" size="large" slot="end"></ion-icon>
+  </ion-menu-button>
+</div>
+<ng-template #noProject>
+  <div class="top">
+    <p>Perfil</p>
+    <ion-menu-button slot="end">
+      <ion-icon name="menu" size="large" slot="end"></ion-icon>
+    </ion-menu-button>
+  </div>
+</ng-template>
+
+<ion-spinner *ngIf="isLoading"></ion-spinner>
+
+<ion-content fullscreen>
+
+  <div class="header">
+    <div class="photo"></div>
+    <p class="name">{{ user?.first_name }} {{ user?.last_name }}</p>
+    <p class="user">@{{ user?.username }} - Profissão</p>
+    <p class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+    <!-- <p class="email">{{ user?.email }}</p> -->
+  </div>
+
+  <div class="options">
+
+    <button *ngIf="projectId">Convidar para projeto</button>
+
+    <button class="delete-btn" (click)="deleteContact( user?.id )" *ngIf="user?.isContact; addButton">Excluir contato</button>
+    <ng-template #addButton>
+      <button (click)="addUser( user?.id )">Adicionar contato</button>
+    </ng-template>
+
+  </div>
+
+  <div class="contacts">
+    <div class="contacts-top">
+      <p>Contatos</p>
+    </div>
+    <div class="list" scrollX="true">
+      
+      <div class="item" *ngFor='let contact of user?.contacts'>
+        <div></div>
+        <p>{{ contact.first_name }}</p>
+      </div>
+      
+    </div>
+  </div>
+
+</ion-content>
